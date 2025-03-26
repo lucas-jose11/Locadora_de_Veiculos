@@ -1,0 +1,15 @@
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\bin\Debug\net8.0\Locadora_de_Veículos.exe
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\bin\Debug\net8.0\Locadora_de_Veículos.deps.json
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\bin\Debug\net8.0\Locadora_de_Veículos.runtimeconfig.json
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\bin\Debug\net8.0\Locadora_de_Veículos.dll
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\bin\Debug\net8.0\Locadora_de_Veículos.pdb
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.AssemblyInfoInputs.cache
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.AssemblyInfo.cs
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.csproj.CoreCompileInputs.cache
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.sourcelink.json
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.dll
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\refint\Locadora_de_Veículos.dll
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.pdb
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\Locadora_de_Veículos.genruntimeconfig.cache
+C:\Users\lucas\source\repos\sln.Locadora_de_Veículos\Locadora_de_Veículos\obj\Debug\net8.0\ref\Locadora_de_Veículos.dll
