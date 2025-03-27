@@ -10,18 +10,46 @@ namespace Locadora_de_Veículos
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(".");
+            Locadora locadora = new Locadora();
+
+            int op = -1;
+            while (op != 3)
+            {
+                op = locadora.MenuLocadora(op);
+
+                //try catch pra caso nulo
+                Console.Clear();
+                switch (op)
+                {
+                    case 1:
+                        locadora.RegistrarVeiculo();
+                        break;
+
+                    case 2:
+                        locadora.VisualizarVeiculos();
+                        break;
+
+                    case 3:
+                        Console.WriteLine("Tchau...");
+                        Thread.Sleep(1200);
+                        break;
+                }
+            }
+
+
         }
     }
 }
 
 /*
-
-Uma locadora de veículos precisa gerenciar diferentes tipos de automóveis disponíveis para aluguel. Cada veículo tem características específicas e um método para calcular o custo do aluguel com base em sua categoria. Seu desafio é modelar esse sistema utilizando herança, polimorfismo e interfaces.
+Uma locadora de veículos precisa gerenciar diferentes tipos de automóveis disponíveis para aluguel. 
+Cada veículo tem características específicas e um método para calcular o custo do aluguel com base em sua categoria. 
+Seu desafio é modelar esse sistema utilizando herança, polimorfismo e interfaces.
 
 Requisitos do Exercício
       1.    Criar uma interface IVeiculo que deve ter:
-          • Método CalcularAluguel(int dias), que retorna o custo total do aluguel com base na categoria do veículo e na quantidade de dias alugados.
+          • Método CalcularAluguel(int dias), que retorna o custo total do aluguel com base na categoria do veículo 
+           e na quantidade de dias alugados.
       2.    Criar uma classe base Veiculo que implementa IVeiculo e contém:
           • Modelo
           • Marca
@@ -36,10 +64,10 @@ Requisitos do Exercício
           • Cadastre pelo menos um veículo de cada tipo.
           • Exiba o modelo, marca, ano e custo do aluguel para um determinado número de dias.
 
-Exemplo de Saída Esperada
+
+Exemplo de Saída Esperada:
 
 Veículo: Corolla | Marca: Toyota | Ano: 2022 | Custo por 5 dias: R$ 1.500,00
 Veículo: XRE 300 | Marca: Honda | Ano: 2021 | Custo por 5 dias: R$ 675,00
 Veículo: Scania R450 | Marca: Scania | Ano: 2020 | Custo por 5 dias: R$ 3.000,00
-
 */

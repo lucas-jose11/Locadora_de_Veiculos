@@ -23,13 +23,17 @@ namespace Locadora_de_Veículos
         private double _valorBaseDiariaAluguel;
 
 
-        //se eu quiser que o usuário escreva:
         public string Modelo
         {
             get { return _modelo; }
             set
             {
-                _modelo = value; //fzr o compade digitar o nome?
+                if (!(String.IsNullOrEmpty(value)))
+                {
+                    _marca = value;
+                }
+                else
+                    throw new Exception("Campo do Modelo nulo.");
             }
         }
 
@@ -38,7 +42,12 @@ namespace Locadora_de_Veículos
             get { return _marca; }
             set
             {
-                _marca = value; //marca tbm?
+                if (!(String.IsNullOrEmpty(value)))
+                {
+                    _marca = value;
+                }
+                else
+                    throw new Exception("Campo da Marca nulo.");
             }
         }
 
@@ -47,7 +56,12 @@ namespace Locadora_de_Veículos
             get { return _ano;}
             set 
             {
-                _ano = value; //já é implicito no C# o get set
+                if (!(value < 1886 || value > 2025)) 
+                {
+                    _ano = value;
+                }
+                else
+                    throw new Exception("Ano do carro equivocado.");
             }
         }
 

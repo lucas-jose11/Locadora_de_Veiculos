@@ -8,5 +8,12 @@ namespace Locadora_de_Veículos
 {
     public class Caminhao : Veiculo
     {
+
+        public void CalcularAluguel()
+        {
+            ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * 1.2;
+        }
     }
+
+
 }
