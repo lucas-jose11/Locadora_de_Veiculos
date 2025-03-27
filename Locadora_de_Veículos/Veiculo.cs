@@ -75,6 +75,18 @@ namespace Locadora_de_Veículos
         }
 
 
+        public Veiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel)
+        {
+            Modelo = modelo;
+            Marca = marca;
+            Ano = ano;
+            ValorBaseDiariaAluguel = valorBaseDiariaAluguel;
+        }
+
+        public virtual void ExibirInformacoes(Veiculo) //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
+        {
+            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Valor para aluguel diária: {ValorBaseDiariaAluguel}.");
+        }
     }
 
 }
