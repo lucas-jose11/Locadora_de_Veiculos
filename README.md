@@ -6,7 +6,7 @@ Requisitos do Exercício
 
       1.    Criar uma interface IVeiculo que deve ter:
 
-          • Método CalcularAluguel(int dias), que retorna o custo total do aluguel com base na categoria do veículo 
+ Método CalcularAluguel(int dias), que retorna o custo total do aluguel com base na categoria do veículo 
            e na quantidade de dias alugados.
       
       2.    Criar uma classe base Veiculo que implementa IVeiculo e contém:
