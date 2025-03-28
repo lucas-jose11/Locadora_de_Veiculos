@@ -9,9 +9,15 @@ namespace Locadora_de_Veículos
     public class Caminhao : Veiculo
     {
 
-        public void CalcularAluguel()
+        public Caminhao(string modelo, string marca, int ano, double valorBaseDiario)
+        : base(modelo, marca, ano, valorBaseDiario)
         {
-            ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * 1.2;
+            // Aqui você pode adicionar lógica específica do caminhao, se necessário
+        }
+
+        public override double CalcularAluguel(int dias)
+        {
+            return ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * 1.2;
         }
     }
 

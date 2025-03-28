@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace Locadora_de_Veículos
 {
-    public class Veiculo : IVeiculo
+    public abstract class Veiculo : IVeiculo
     {
-        public void CalcularAluguel(int dias)
-        {
-            //será sobrescrito pelas classes filhas
-        }
+        public abstract double CalcularAluguel(int dias); //corpo é o entre { }, aí fica contraditório
 
         private string _modelo;
 
@@ -83,7 +80,7 @@ namespace Locadora_de_Veículos
             ValorBaseDiariaAluguel = valorBaseDiariaAluguel;
         }
 
-        public virtual void ExibirInformacoes(Veiculo) //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
+        public virtual void ExibirInformacoes() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
         {
             Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Valor para aluguel diária: {ValorBaseDiariaAluguel}.");
         }

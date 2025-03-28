@@ -9,9 +9,14 @@ namespace Locadora_de_Veículos
     public class Moto : Veiculo
     {
 
-        public void CalcularAluguel()
+        public Moto(string modelo, string marca, int ano, double valorBaseDiario)
+        : base(modelo, marca, ano, valorBaseDiario)
         {
-            ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * 0.8;
+            // Aqui você pode adicionar lógica específica do moto, se necessário
+        }
+        public override double CalcularAluguel(int dias)
+        {
+            return ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * 0.8;
         }
     }
 }
