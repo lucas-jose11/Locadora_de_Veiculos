@@ -34,7 +34,8 @@ namespace Locadora_de_Veículos
             Console.WriteLine("");
             Console.WriteLine("[1] - Registrar veículo");
             Console.WriteLine("[2] - Visualizar veículos");
-            Console.WriteLine("[3] - SAIR");
+            Console.WriteLine("[3] - SAIR"); 
+            //tem opcao pra pedir pra alugar carro? 
             op = EscolhaEntreOsNumeros(1, 3);
             return op;
         }
@@ -66,7 +67,7 @@ namespace Locadora_de_Veículos
                 Console.WriteLine("Qual o tipo do veículo?\n1- Carro || 2- Moto || 3- Caminhão");
                 int tipoVeiculo = EscolhaEntreOsNumeros(1, 3);
 
-                switch (tipoVeiculo)
+                switch (tipoVeiculo) //fzr o veiculo assim? n tem outro jeito para conseguir cadastrar sem switch case?
                 {
                     case 1:
                         Carro novoCarro = new Carro(nomeVeiculo, marcaVeiculo, anoVeiculo, valorDiaria);
