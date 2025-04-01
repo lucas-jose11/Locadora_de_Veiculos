@@ -8,7 +8,10 @@ namespace Locadora_de_Veículos.Interface
 {
     public interface IVeiculo
     {
-        double CalcularAluguel(int dias);
+        public double CalcularAluguel(int dias);
         //retorna o custo total do aluguel com base na categoria do veículo e na quantidade de dias alugados
+
+        Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel);             
+        
     }
 }

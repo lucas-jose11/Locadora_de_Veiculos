@@ -9,7 +9,12 @@ namespace Locadora_de_Veículos
 {
     public abstract class Veiculo : IVeiculo
     {
-        public abstract double CalcularAluguel(int dias); //corpo é o entre { }, aí fica contraditório
+        public virtual double CalcularAluguel(int dias) //corpo é o entre { }, aí fica contraditório, se fosse abstract
+        {
+            return ValorBaseDiariaAluguel * dias;
+        }
+
+        public abstract double CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel);
 
         private string _modelo;
 
@@ -71,14 +76,6 @@ namespace Locadora_de_Veículos
             }
         }
 
-
-        public Veiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel)
-        {
-            Modelo = modelo;
-            Marca = marca;
-            Ano = ano;
-            ValorBaseDiariaAluguel = valorBaseDiariaAluguel;
-        }
 
         public virtual void ExibirInformacoes() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
         {

@@ -9,16 +9,20 @@ namespace Locadora_de_Veículos
     public class Caminhao : Veiculo
     {
 
-        public Caminhao(string modelo, string marca, int ano, double valorBaseDiario)
-        : base(modelo, marca, ano, valorBaseDiario)
+        public override Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel)
         {
-            // Aqui você pode adicionar lógica específica do caminhao, se necessário
+            Modelo = modelo;
+            Marca = marca;
+            Ano = ano;
+            ValorBaseDiariaAluguel = valorBaseDiariaAluguel;
         }
+        
 
         public override double CalcularAluguel(int dias)
         {
-            return ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * 1.2;
+            return base.CalcularAluguel(dias) * 1.2;
         }
+
     }
 
 

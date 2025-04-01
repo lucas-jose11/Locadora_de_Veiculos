@@ -13,7 +13,7 @@ namespace Locadora_de_Veículos
             Locadora locadora = new Locadora();
 
             int op = -1;
-            while (op != 3)
+            while (op != 4)
             {
                 op = locadora.MenuLocadora(op);
 
@@ -30,6 +30,12 @@ namespace Locadora_de_Veículos
                         break;
 
                     case 3:
+                        //função alugarcarro
+                        break;
+
+                    //devolver carro? ai teria o aributo de DISPONIBILIDADE
+
+                    case 4:
                         Console.WriteLine("Tchau...");
                         Thread.Sleep(1200);
                         break;

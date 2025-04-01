@@ -9,14 +9,18 @@ namespace Locadora_de_Veículos
     public class Moto : Veiculo
     {
 
-        public Moto(string modelo, string marca, int ano, double valorBaseDiario)
-        : base(modelo, marca, ano, valorBaseDiario)
+        Veiculo override CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel)
         {
-            // Aqui você pode adicionar lógica específica do moto, se necessário
+            Modelo = modelo;
+            Marca = marca;
+            Ano = ano;
+            ValorBaseDiariaAluguel = valorBaseDiariaAluguel;
         }
+        
         public override double CalcularAluguel(int dias)
         {
-            return ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * 0.8;
+            return ValorBaseDiariaAluguel = (ValorBaseDiariaAluguel * dias) * 0.9;
         }
+
     }
 }
