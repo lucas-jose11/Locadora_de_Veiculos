@@ -11,12 +11,15 @@ namespace Locadora_de_Veículos
 
         public override Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel)
         {
-            Modelo = modelo;
-            Marca = marca;
-            Ano = ano;
-            ValorBaseDiariaAluguel = valorBaseDiariaAluguel;
+            return new Caminhao()
+            {
+                Modelo = modelo,
+                Marca = marca,
+                Ano = ano,
+                ValorBaseDiariaAluguel = valorBaseDiariaAluguel
+            };
         }
-        
+
 
         public override double CalcularAluguel(int dias)
         {

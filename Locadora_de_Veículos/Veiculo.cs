@@ -9,13 +9,6 @@ namespace Locadora_de_Veículos
 {
     public abstract class Veiculo : IVeiculo
     {
-        public virtual double CalcularAluguel(int dias) //corpo é o entre { }, aí fica contraditório, se fosse abstract
-        {
-            return ValorBaseDiariaAluguel * dias;
-        }
-
-        public abstract double CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel);
-
         private string _modelo;
 
         private string _marca;
@@ -23,6 +16,12 @@ namespace Locadora_de_Veículos
         private int _ano;
 
         private double _valorBaseDiariaAluguel;
+
+        public virtual double CalcularAluguel(int dias) //corpo é o entre { }, aí fica contraditório, se fosse abstract
+        {
+            return ValorBaseDiariaAluguel * dias;
+        }
+
 
 
         public string Modelo
@@ -32,7 +31,7 @@ namespace Locadora_de_Veículos
             {
                 if (!(String.IsNullOrEmpty(value)))
                 {
-                    _marca = value;
+                    _modelo = value;
                 }
                 else
                     throw new Exception("Campo do Modelo nulo.");
@@ -55,10 +54,10 @@ namespace Locadora_de_Veículos
 
         public int Ano
         {
-            get { return _ano;}
-            set 
+            get { return _ano; }
+            set
             {
-                if (!(value < 1886 || value > 2025)) 
+                if (!(value < 1886 || value > 2025))
                 {
                     _ano = value;
                 }
@@ -69,13 +68,15 @@ namespace Locadora_de_Veículos
 
         public double ValorBaseDiariaAluguel
         {
-            get { return _valorBaseDiariaAluguel;}
-            set
-            {
-                _valorBaseDiariaAluguel = value;//o value que aparece "do nada"
-            }
+            get { return _valorBaseDiariaAluguel; }
+            set { _valorBaseDiariaAluguel = value; }//o value que aparece "do nada"
         }
 
+        public virtual Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorDiaria)
+        {
+            // Implementação padrão (pode lançar uma exceção ou retornar null)
+            throw new NotImplementedException("Método deve ser sobrescrito pelas subclasses.");
+        }
 
         public virtual void ExibirInformacoes() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
         {

@@ -73,7 +73,7 @@ namespace Locadora_de_Veículos
                 switch (tipoVeiculo) //fzr o veiculo assim? n tem outro jeito para conseguir cadastrar sem switch case?
                 {
                     case 1:
-                        Carro novoCarro = new Veiculo(nomeVeiculo, marcaVeiculo, anoVeiculo, valorDiaria);
+                        Carro novoCarro = new Carro(nomeVeiculo, marcaVeiculo, anoVeiculo, valorDiaria);
                         carros.Add(novoCarro);
                         break;
 
