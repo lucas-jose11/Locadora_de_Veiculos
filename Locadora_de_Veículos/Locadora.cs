@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -19,90 +20,120 @@ namespace Locadora_de_Veículos
 
         //};
 
-        public List<Carro> carros = new List<Carro>();
+        public List<Carro> carros = new List<Carro>
+        {
+            new Veiculo("Carrinho","CarroIndústria",2015,100,true,0)
+        }
 
         public List<Moto> motos = new List<Moto>();
 
         public List<Caminhao> caminhoes = new List<Caminhao>();
 
-        //solução seria criar 3 listas diferentes?
+        public List<Veiculo> allVehicles = new List<Veiculo>();
+
+        public List<Veiculo> veiculosAlugados = new List<Veiculo>();
+
 
         public int MenuLocadora(int op)
         {
+            Console.Clear();
+
             Console.WriteLine("Bem-vindo a Locadora de Veículos da Rua.");
             Console.WriteLine("Escolha uma das opções abaixo:");
             Console.WriteLine("");
             Console.WriteLine("[1] - Registrar veículo");
             Console.WriteLine("[2] - Visualizar veículos");
             Console.WriteLine("[3] - Alugar veículo");
-            Console.WriteLine("[4] - SAIR"); 
-            //tem opcao pra pedir pra alugar carro? 
-            op = EscolhaEntreOsNumeros(1, 4);
+            Console.WriteLine("[3] - Devolver veículo");
+            Console.WriteLine("[5] - SAIR");
+            op = EscolhaEntreOsNumeros(1, 5);
             return op;
         }
 
         public void RegistrarVeiculo()
         {
-            //Veículo: Corolla | Marca: Toyota | Ano: 2022 | Custo por 5 dias: R$ 1.500,00
-            //tipo do veículo e seus atributos
-            //try catch pra tentar colocar nulo no int ou string 
-            //fzr loop pra começar dnv caso erre algo
-
-            try
+            while (true) 
             {
-                Console.WriteLine(">>>>>>>REGISTRANDO VEÍCULO NO BANCO DE DADOS<<<<<<<");
-                Console.WriteLine("");
-
-                Console.WriteLine("Modelo (nome) do veículo:");
-                string nomeVeiculo = Console.ReadLine();
-
-                Console.WriteLine("Marca do veículo:");
-                string marcaVeiculo = Console.ReadLine();
-
-                Console.WriteLine("Ano do veículo");
-                int anoVeiculo = int.Parse(Console.ReadLine());
-
-                Console.WriteLine("Aluguel para diária, utilizar padrão \"XX,XX\":");
-                double valorDiaria = double.Parse(Console.ReadLine());
-
-                Console.WriteLine("Qual o tipo do veículo?\n1- Carro || 2- Moto || 3- Caminhão");
-                int tipoVeiculo = EscolhaEntreOsNumeros(1, 3);
-
-                if (!(string.IsNullOrEmpty(nomeVeiculo)) || !(string.IsNullOrEmpty(marcaVeiculo)) || anoVeiculo == null || valorDiaria == null)
-
-                switch (tipoVeiculo) //fzr o veiculo assim? n tem outro jeito para conseguir cadastrar sem switch case?
+                try
                 {
-                    case 1:
-                        Carro novoCarro = new Carro(nomeVeiculo, marcaVeiculo, anoVeiculo, valorDiaria);
-                        carros.Add(novoCarro);
-                        break;
+                    Console.WriteLine(">>>>>>> REGISTRANDO VEÍCULO <<<<<<<");
 
-                    case 2:
-                        Moto novaMoto = new Veiculo(nomeVeiculo, marcaVeiculo, anoVeiculo, valorDiaria);
-                        motos.Add(novaMoto);
-                        break;
+                    Console.WriteLine("Modelo do veículo:");
+                    string modelo = Console.ReadLine();
 
-                    case 3:
-                        Caminhao novoCaminhao = new Veiculo(nomeVeiculo, marcaVeiculo, anoVeiculo, valorDiaria);
-                        caminhoes.Add(novoCaminhao);
-                        break;
+                    Console.WriteLine("Marca do veículo:");
+                    string marca = Console.ReadLine();
+
+                    Console.WriteLine("Ano do veículo:");
+                    if (!int.TryParse(Console.ReadLine(), out int ano) || ano < 1886 || ano > 2025)
+                        throw new Exception("Ano inválido. Digite entre 1886 e 2025.");
+
+                    Console.WriteLine("Valor da diária (XX,XX):");
+                    if (!double.TryParse(Console.ReadLine(), out double valorDiaria) || valorDiaria <= 0)
+                        throw new Exception("Valor inválido. Digite um número positivo.");
+
+                    Console.WriteLine("Tipo do veículo:\n1- Carro || 2- Moto || 3- Caminhão");
+                    int escolha = EscolhaEntreOsNumeros(1, 3);
+
+                    if (escolha == 1)
+                    {
+                        Carro carro = new Carro()
+                        {
+                            Modelo = modelo,
+                            Marca = marca,
+                            Ano = ano,
+                            ValorBaseDiariaAluguel = valorDiaria,
+                            Status = true,
+                            ValorAluguelAPagar = 0
+                        };
+                        carros.Add(carro);
+                        allVehicles.Add(carro);
+                    }
+                    else if (escolha == 2)
+                    {
+                        Moto moto = new Moto()
+                        {
+                            Modelo = modelo,
+                            Marca = marca,
+                            Ano = ano,
+                            ValorBaseDiariaAluguel = valorDiaria,
+                            Status = true,
+                            ValorAluguelAPagar = 0
+                        };
+                        motos.Add(moto);
+                        allVehicles.Add(moto);
+                    }
+                    else if (escolha == 3)
+                    {
+                        Caminhao caminhao = new Caminhao()
+                        {
+                            Modelo = modelo,
+                            Marca = marca,
+                            Ano = ano,
+                            ValorBaseDiariaAluguel = valorDiaria,
+                            Status = true,
+                            ValorAluguelAPagar = 0
+                        };
+                        caminhoes.Add(caminhao);
+                        allVehicles.Add(caminhao);
+                    }
+
+                    Console.WriteLine("Veículo registrado com sucesso! Voltando ao menu...");
+                    Thread.Sleep(1800);
+                    Console.Clear();
+                    break; 
                 }
-
+                catch (Exception e)
+                {
+                    Console.WriteLine($"ERRO: {e.Message}");
+                    Console.WriteLine("Tente novamente.\n");
+                }
             }
-            catch (Exception e)
-            {
-                
-                Console.WriteLine($"{e.Message}");
-                Console.WriteLine("ERRO, FAÇA CORRETAMENTE");
-                RegistrarVeiculo();
-            }
-
         }
+
 
         public void VisualizarVeiculos()
         {
-            //foreach na listaVeiculos com o metodo que criei na Classe Veiculo
-
             Console.WriteLine(">>>>>VEÍCULOS REGISTRADOS<<<<<");
 
             Console.WriteLine("\n=====================================");
@@ -119,6 +150,7 @@ namespace Locadora_de_Veículos
 
             foreach (var moto in motos)
             {
+                moto.ExibirInformacoes();
             }
 
             Console.WriteLine("\n=====================================");
@@ -126,27 +158,130 @@ namespace Locadora_de_Veículos
 
             foreach (var caminhao in caminhoes)
             {
+                caminhao.ExibirInformacoes();
+            }
+        }
+
+
+        public void AlugarVeiculo()
+        {
+            try
+            {
+                Console.WriteLine("\nVEÍCULOS DISPONÍVEIS:");
+                VisualizarVeiculos();
+
+                Console.WriteLine("\nDigite o NOME do veículo que quer alugar");
+                string vehicleToRent = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(vehicleToRent))
+                    throw new Exception("Digite o nome do veículo.");
+
+                Veiculo veiculoPraAlugar = carros.FirstOrDefault(v =>
+                    v.Modelo.Equals(vehicleToRent, StringComparison.OrdinalIgnoreCase) &&
+                    v.Status);
+
+                if (veiculoPraAlugar == null)
+                {
+                    Console.WriteLine("Veículo inexistente ou já alugado");
+                    Console.WriteLine("Pressione qualquer tecla para voltar");
+                    Console.ReadLine();
+                    return;
+                }
+
+                Console.WriteLine($"\nPor quantos dias quer alugar o {vehicleToRent}? (Máx 14 dias)");
+                int daysToRent = EscolhaEntreOsNumeros(1, 14);
+
+                // Modifica o veículo ORIGINAL
+                veiculoPraAlugar.Status = false;
+                veiculoPraAlugar.ValorAluguelAPagar = veiculoPraAlugar.CalcularAluguel(daysToRent);
+
+                // Adiciona a referência do original na lista de alugados
+                veiculosAlugados.Add(veiculoPraAlugar);
+
+                Console.WriteLine("");
+                Console.WriteLine($"Aluguel confirmado!" +
+                                 $"\nVeículo: {veiculoPraAlugar.Modelo}" +
+                                 $"\nValor total: R${veiculoPraAlugar.ValorAluguelAPagar:F2}" +
+                                 $"\nPressione qualquer tecla para continuar...");
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Erro: {e.Message}");
+                Console.WriteLine("Recarregando...");
+                Thread.Sleep(2000);
+                AlugarVeiculo();
+            }
+        }
+
+
+        public void DevolverVeiculo()
+        {
+            try
+            {
+                Console.WriteLine("Qual veículo você quer devolver?");
+                Console.WriteLine("");
+
+                Console.WriteLine("=============================================");
+                Console.WriteLine("VEÍCULOS ALUGADOS:");
+                foreach (var veiculo in veiculosAlugados)
+                {
+                    veiculo.ExibirInformacoesAlugados();
+                    Console.WriteLine("---");
+                }
+                
+                Console.WriteLine("=============================================");
+
+                Console.WriteLine("");
+                Console.WriteLine("Qual você quer devolver?");
+                string veiculoPraDevolverUsuarioResposta = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(veiculoPraDevolverUsuarioResposta))
+                    throw new Exception("Digite o nome do veículo.");
+
+                Veiculo veiculoPraDevolver = carros.FirstOrDefault(v =>
+                    v.Modelo.Equals(veiculoPraDevolverUsuarioResposta, StringComparison.OrdinalIgnoreCase) &&
+                    v.Status);
+
+                Console.WriteLine("");
+                Console.WriteLine("Veículo devolvido!");
+                veiculoPraDevolver.Status = true;
+
+                Console.WriteLine("");
+                Console.WriteLine("Aperte qualquer tecla para voltar ao menu.");
+                Console.ReadLine();
 
             }
-
+            catch (Exception e) 
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
-        public void AlugarCarro()
-        {
-            //qual nome do veiculo que quer alugar, qnts dias quer alugar e se n tiver nome assim falar
-        }
+
 
 
         public int EscolhaEntreOsNumeros(int a, int b)
         {
-            Console.WriteLine($"Escreva um número inteiro entre {a} e {b}.");
-            int resposta = int.Parse(Console.ReadLine());
-
-            if (resposta >= a && resposta <= b)
-                return resposta;
-            else
+            try
             {
-                Console.WriteLine("\nEscolha um número válido!");
+                Console.WriteLine($"Escreva um número inteiro entre {a} e {b}.");
+                int resposta;
+
+                if (!int.TryParse(Console.ReadLine(), out resposta))
+                    throw new Exception("Digite um número!");
+
+                if (resposta >= a && resposta <= b)
+                    return resposta;
+                else
+                {
+                    Console.WriteLine("\nEscolha um número válido!");
+                    return EscolhaEntreOsNumeros(a, b);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return EscolhaEntreOsNumeros(a, b);
             }
         }

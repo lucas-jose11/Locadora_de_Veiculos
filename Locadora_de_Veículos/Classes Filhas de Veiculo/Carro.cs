@@ -8,22 +8,23 @@ namespace Locadora_de_Veículos
 {
     public class Carro : Veiculo
     {
-        public override Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel)
+        public override Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel, bool disponibilidade, double valorAluguelAPagar)
         {
             return new Carro()
             {
                 Modelo = modelo,
                 Marca = marca,
                 Ano = ano,
-                ValorBaseDiariaAluguel = valorBaseDiariaAluguel
+                ValorBaseDiariaAluguel = valorBaseDiariaAluguel,
+                Status = disponibilidade,
+                ValorAluguelAPagar = 0
             };
         }
+       
 
-
-
-        public override double CalcularAluguel(int dias) //oq o dias fará? é quantos dias a pessoa quiser? ela temq falar?
+        public override double CalcularAluguel(int dias)
         {
-            return ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * dias; //o desconto é no total dos dias
+            return ValorBaseDiariaAluguel = ValorBaseDiariaAluguel * dias;
         }
 
     }

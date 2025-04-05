@@ -11,7 +11,7 @@ namespace Locadora_de_Veículos.Interface
         double CalcularAluguel(int dias);
         //retorna o custo total do aluguel com base na categoria do veículo e na quantidade de dias alugados
 
-        Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel);             
+        Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorBaseDiariaAluguel, bool status, double valorAluguelAPagar);             
         
     }
 }

@@ -17,6 +17,10 @@ namespace Locadora_de_Veículos
 
         private double _valorBaseDiariaAluguel;
 
+        private bool _status;
+
+        private double _valorAluguelAPagar;
+
         public virtual double CalcularAluguel(int dias) //corpo é o entre { }, aí fica contraditório, se fosse abstract
         {
             return ValorBaseDiariaAluguel * dias;
@@ -72,7 +76,19 @@ namespace Locadora_de_Veículos
             set { _valorBaseDiariaAluguel = value; }//o value que aparece "do nada"
         }
 
-        public virtual Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorDiaria)
+        public bool Status
+        {
+            get { return _status; }
+            set {  _status = value;}
+        }
+
+        public double ValorAluguelAPagar
+        {
+            get { return _valorAluguelAPagar; }
+            set { _valorAluguelAPagar = value; }
+        }
+
+        public virtual Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorDiaria, bool status, double valorAluguelAPagar)
         {
             // Implementação padrão (pode lançar uma exceção ou retornar null)
             throw new NotImplementedException("Método deve ser sobrescrito pelas subclasses.");
@@ -80,7 +96,12 @@ namespace Locadora_de_Veículos
 
         public virtual void ExibirInformacoes() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
         {
-            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Valor para aluguel diária: {ValorBaseDiariaAluguel}.");
+            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || Valor para aluguel diária: {ValorBaseDiariaAluguel}.");
+        }
+
+        public virtual void ExibirInformacoesAlugados() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
+        {
+            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || VALOR A PAGAR PELA ALUGAÇÃO: {ValorAluguelAPagar}.");
         }
     }
 
