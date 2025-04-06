@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
+﻿
 namespace Locadora_de_Veículos
 {
     public class Locadora
     {
-
         public List<Carro> carros = new List<Carro>
         {
             new Carro()
@@ -25,7 +14,6 @@ namespace Locadora_de_Veículos
                 Status = true,
                 ValorAluguelAPagar = 0
             },
-            
 
             new Carro()
             {
@@ -36,8 +24,6 @@ namespace Locadora_de_Veículos
                 Status = false,
                 ValorAluguelAPagar = 0
             }
-
-
         };
 
         public List<Moto> motos = new List<Moto>
@@ -54,7 +40,7 @@ namespace Locadora_de_Veículos
 
             new Moto()
             {
-                Modelo = "Corre/Rápido",
+                Modelo = "CorreRápido",
                 Marca = "Velozzzz",
                 Ano = 2017,
                 ValorBaseDiariaAluguel = 100,
@@ -78,7 +64,7 @@ namespace Locadora_de_Veículos
             new Caminhao()
             {
                 Modelo = "Faísca",
-                Marca = "Fanticamente",
+                Marca = "Trilegal",
                 Ano = 1993,
                 ValorBaseDiariaAluguel = 350,
                 Status = true,
@@ -86,33 +72,30 @@ namespace Locadora_de_Veículos
             }
         };
 
-        public void InicializarListas()
-        {
-            foreach (var carro in carros)
-            {
-                todosOsVeiculos.Add(carro);
-            }
-
-            foreach (var moto in motos)
-            {
-                todosOsVeiculos.Add(moto);
-            }
-
-            foreach (var caminhao in caminhoes)
-            {
-                todosOsVeiculos.Add(caminhao);
-            }
-
-        }
-
         public List<Veiculo> todosOsVeiculos = new List<Veiculo>();
 
         public List<Veiculo> veiculosAlugados = new List<Veiculo>();
 
+        public void InicializarListas()
+        {
+            foreach (Veiculo carro in carros)
+                todosOsVeiculos.Add(carro);
+
+            foreach (Veiculo moto in motos)
+                todosOsVeiculos.Add(moto);
+
+            foreach (Veiculo caminhao in caminhoes)
+                todosOsVeiculos.Add(caminhao);
+        }
 
         public int MenuLocadora(int op)
         {
-            Console.Clear();
+            if (op == -2)
+            {
+                Console.WriteLine("-------------------------");
+                Console.WriteLine("!!!Escolha um número válido!!!");
+                Console.WriteLine("-------------------------");
+            }
 
             Console.WriteLine("Bem-vindo a Locadora de Veículos da Rua.");
             Console.WriteLine("Escolha uma das opções abaixo:");
@@ -152,7 +135,7 @@ namespace Locadora_de_Veículos
 
                     Console.WriteLine("Valor da diária (XX,XX):");
                     if (!double.TryParse(Console.ReadLine(), out double valorDiaria) || valorDiaria <= 0)
-                        throw new Exception("Valor inválido. Digite um número positivo.");
+                        throw new Exception("Valor inválido. Digite um número positivo no campo da diária.");
 
                     Console.WriteLine("Tipo do veículo:\n1- Carro || 2- Moto || 3- Caminhão");
                     int escolha = EscolhaEntreOsNumeros(1, 3);
@@ -200,8 +183,8 @@ namespace Locadora_de_Veículos
                         todosOsVeiculos.Add(caminhao);
                     }
 
-                    Console.WriteLine("Veículo registrado com sucesso! Voltando ao menu...");
-                    Thread.Sleep(1800);
+                    Console.WriteLine("Veículo registrado com sucesso! Aperte QUALQUER tecla para voltar ao menu.");
+                    Console.ReadKey();
                     Console.Clear();
                     break;
                 }
@@ -216,43 +199,38 @@ namespace Locadora_de_Veículos
 
         public void VisualizarVeiculos()
         {
-            Console.WriteLine(">>>>>VEÍCULOS REGISTRADOS<<<<<");
+            Console.WriteLine(">>>>>>> VEÍCULOS REGISTRADOS <<<<<<<");
 
             Console.WriteLine("\n=====================================");
             Console.WriteLine("VEÍCULOS TIPO CARRO:");
 
             foreach (var carro in carros)
-            {
                 carro.ExibirInformacoes();
 
-            }
 
             Console.WriteLine("\n=====================================");
             Console.WriteLine("VEÍCULOS TIPO MOTO:");
 
             foreach (var moto in motos)
-            {
                 moto.ExibirInformacoes();
-            }
+
 
             Console.WriteLine("\n=====================================");
             Console.WriteLine("VEÍCULOS TIPO CAMINHÃO:");
 
             foreach (var caminhao in caminhoes)
-            {
                 caminhao.ExibirInformacoes();
-            }
-            Console.WriteLine("");
         }
 
         public void AlugarVeiculo()
         {
             try
             {
-                Console.WriteLine("\nVEÍCULOS DISPONÍVEIS:");
+                Console.WriteLine(">>>>>>> VEÍCULOS DISPONÍVEIS <<<<<<<");
                 VisualizarVeiculos();
 
-                Console.WriteLine("\nDigite o NOME do veículo que quer alugar");
+                Console.WriteLine("-----------------------------------------");
+                Console.WriteLine("Digite o NOME do veículo que quer alugar");
                 string veiculoParaAlugar = Console.ReadLine();
 
                 if (string.IsNullOrEmpty(veiculoParaAlugar))
@@ -267,7 +245,7 @@ namespace Locadora_de_Veículos
                     Console.WriteLine(">>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<");
                     Console.WriteLine("Veículo inexistente ou já alugado");
                     Console.WriteLine("Pressione QUALQUER tecla para voltar");
-                    Console.ReadLine();
+                    Console.ReadKey();
                     return;
                 }
 
@@ -280,17 +258,19 @@ namespace Locadora_de_Veículos
                 veiculosAlugados.Add(veiculoPraAlugar);
 
                 Console.WriteLine("");
+                Console.WriteLine("=============================================");
                 Console.WriteLine($"Aluguel confirmado!" +
                                  $"\nVeículo: {veiculoPraAlugar.Modelo}" +
                                  $"\nValor total: R${veiculoPraAlugar.ValorAluguelAPagar:F2}" +
                                  $"\nPressione qualquer tecla para continuar...");
-                Console.ReadLine();
+                Console.WriteLine("=============================================");
+                Console.ReadKey();
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Erro: {e.Message}");
                 Console.WriteLine("Recarregando...");
-                Thread.Sleep(2000);
+                Thread.Sleep(1500);
                 AlugarVeiculo();
             }
         }
@@ -299,42 +279,52 @@ namespace Locadora_de_Veículos
         {
             try
             {
-                Console.WriteLine("Qual veículo você quer devolver?");
-                Console.WriteLine("");
+                Console.Clear();
+                Console.WriteLine("=== DEVOLUÇÃO DE VEÍCULO ===");
 
-                Console.WriteLine("=============================================");
-                Console.WriteLine("VEÍCULOS ALUGADOS:");
+                if (veiculosAlugados.Count == 0)
+                {
+                    Console.WriteLine("\nNenhum veículo alugado no momento. Aperte QUALQUER tecla para voltar.");
+                    Console.ReadKey();
+                    return;
+                }
+
+                Console.WriteLine("\nVEÍCULOS ALUGADOS:");
+                Console.WriteLine("=================================");
                 foreach (var veiculo in veiculosAlugados)
                 {
                     veiculo.ExibirInformacoesAlugados();
-                    Console.WriteLine("---");
+                    Console.WriteLine("---------------------------------");
                 }
 
-                Console.WriteLine("=============================================");
+                Console.Write("\nDigite o modelo do veículo a devolver: ");
+                string modelo = Console.ReadLine()?.Trim();
 
-                Console.WriteLine("");
-                Console.WriteLine("Qual você quer devolver?");
-                string veiculoPraDevolverUsuarioResposta = Console.ReadLine();
+                if (string.IsNullOrEmpty(modelo))
+                    throw new Exception("Modelo não pode ser vazio.");
 
-                if (string.IsNullOrEmpty(veiculoPraDevolverUsuarioResposta))
-                    throw new Exception("Digite o nome do veículo.");
+                Veiculo veiculoParaDevolver = veiculosAlugados
+                    .FirstOrDefault(v => v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase));
 
-                Veiculo veiculoPraDevolver = carros.FirstOrDefault(v =>
-                    v.Modelo.Equals(veiculoPraDevolverUsuarioResposta, StringComparison.OrdinalIgnoreCase) &&
-                    v.Status);
+                if (veiculoParaDevolver == null)
+                {
+                    Console.WriteLine("\nVeículo não encontrado na lista de alugados!");
+                    Console.ReadKey();
+                    return;
+                }
 
-                Console.WriteLine("");
-                Console.WriteLine("Veículo devolvido!");
-                veiculoPraDevolver.Status = true;
+                veiculoParaDevolver.Status = true;
+                veiculoParaDevolver.ValorAluguelAPagar = 0;
 
-                Console.WriteLine("");
-                Console.WriteLine("Aperte qualquer tecla para voltar ao menu.");
-                Console.ReadLine();
+                veiculosAlugados.Remove(veiculoParaDevolver);
 
+                Console.WriteLine($"\nVeículo {veiculoParaDevolver.Modelo} devolvido com sucesso!");
+                Console.ReadKey();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine($"\nErro: {ex.Message}");
+                Console.ReadKey();
             }
         }
 
@@ -353,17 +343,18 @@ namespace Locadora_de_Veículos
                     return resposta;
                 else
                 {
-                    Console.WriteLine("\nEscolha um número válido!");
-                    return EscolhaEntreOsNumeros(a, b);
+                    Console.Clear();
+                    return MenuLocadora(-2);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return EscolhaEntreOsNumeros(a, b);
+                Console.WriteLine("Aperte QUALQUER tecla para continuar.");
+                Console.ReadKey();
+                Console.Clear();
+                return MenuLocadora(-1);
             }
         }
-
-
     }
 }

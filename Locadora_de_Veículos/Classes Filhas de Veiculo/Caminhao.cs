@@ -23,13 +23,9 @@ namespace Locadora_de_Veículos
             };
         }
 
-
         public override double CalcularAluguel(int dias)
         {
             return base.CalcularAluguel(dias) * 1.2;
         }
-
     }
-
-
 }

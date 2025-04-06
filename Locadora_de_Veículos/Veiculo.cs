@@ -1,9 +1,4 @@
 ﻿using Locadora_de_Veículos.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Locadora_de_Veículos
 {
@@ -20,12 +15,6 @@ namespace Locadora_de_Veículos
         private bool _status;
 
         private double _valorAluguelAPagar;
-
-        public virtual double CalcularAluguel(int dias) //corpo é o entre { }, aí fica contraditório, se fosse abstract
-        {
-            return ValorBaseDiariaAluguel * dias;
-        }
-
 
 
         public string Modelo
@@ -88,6 +77,12 @@ namespace Locadora_de_Veículos
             set { _valorAluguelAPagar = value; }
         }
 
+
+        public virtual double CalcularAluguel(int dias) //corpo é o entre { }, aí fica contraditório, se fosse abstract
+        {
+            return ValorAluguelAPagar = ValorBaseDiariaAluguel * dias;
+        }
+        
         public virtual Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorDiaria, bool status, double valorAluguelAPagar)
         {
             // Implementação padrão (pode lançar uma exceção ou retornar null)
@@ -101,7 +96,7 @@ namespace Locadora_de_Veículos
 
         public virtual void ExibirInformacoesAlugados() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
         {
-            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || VALOR A PAGAR PELA ALUGAÇÃO: R${ValorAluguelAPagar}.");
+            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || VALOR A PAGAR PELA ALUGAÇÃO: R${ValorAluguelAPagar:F2}.");
         }
     }
 

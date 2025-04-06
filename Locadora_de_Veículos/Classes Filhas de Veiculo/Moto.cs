@@ -24,8 +24,7 @@ namespace Locadora_de_Veículos
 
         public override double CalcularAluguel(int dias)
         {
-            return ValorBaseDiariaAluguel = (ValorBaseDiariaAluguel * dias) * 0.9;
+            return ValorAluguelAPagar = (ValorBaseDiariaAluguel * dias) * 0.9;
         }
-
     }
 }

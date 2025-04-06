@@ -16,6 +16,7 @@ namespace Locadora_de_Veículos
             while (op != 5)
             {
                 op = locadora.MenuLocadora(op);
+                locadora.InicializarListas();
 
                 //try catch pra caso nulo
                 Console.Clear();
@@ -27,10 +28,11 @@ namespace Locadora_de_Veículos
 
                     case 2:
                         locadora.VisualizarVeiculos();
+                        Console.WriteLine("\n=========================");
+                        Console.WriteLine("Aperte QUALQUER tecla para voltar ao menu.");
                         Console.WriteLine("=========================");
-                        Console.WriteLine("Aperte QUALQUER tecla para voltar ao menu");
-                        Console.WriteLine("=========================");
-                        Console.ReadLine();
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
 
                     case 3:
