@@ -42,8 +42,7 @@ namespace Locadora_de_Veículos
                         break;
 
                     case 5:
-                        Console.WriteLine("Tchau...");
-                        Thread.Sleep(1200);
+                        Console.WriteLine("Volte sempre!");
                         break;
                 }
             }

@@ -96,12 +96,12 @@ namespace Locadora_de_Veículos
 
         public virtual void ExibirInformacoes() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
         {
-            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || Valor para aluguel diária: {ValorBaseDiariaAluguel}.");
+            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || Valor para aluguel diária: R${ValorBaseDiariaAluguel:F2}.");
         }
 
         public virtual void ExibirInformacoesAlugados() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
         {
-            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || VALOR A PAGAR PELA ALUGAÇÃO: {ValorAluguelAPagar}.");
+            Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || VALOR A PAGAR PELA ALUGAÇÃO: R${ValorAluguelAPagar}.");
         }
     }
 
