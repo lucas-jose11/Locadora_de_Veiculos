@@ -62,7 +62,7 @@ namespace Locadora_de_Veículos
         public double ValorBaseDiariaAluguel
         {
             get { return _valorBaseDiariaAluguel; }
-            set { _valorBaseDiariaAluguel = value; }//o value que aparece "do nada"
+            set { _valorBaseDiariaAluguel = value; }
         }
 
         public bool Status
@@ -78,26 +78,24 @@ namespace Locadora_de_Veículos
         }
 
 
-        public virtual double CalcularAluguel(int dias) //corpo é o entre { }, aí fica contraditório, se fosse abstract
+        public virtual double CalcularAluguel(int dias)
         {
             return ValorAluguelAPagar = ValorBaseDiariaAluguel * dias;
         }
         
         public virtual Veiculo CriarVeiculo(string modelo, string marca, int ano, double valorDiaria, bool status, double valorAluguelAPagar)
         {
-            // Implementação padrão (pode lançar uma exceção ou retornar null)
             throw new NotImplementedException("Método deve ser sobrescrito pelas subclasses.");
         }
 
-        public virtual void ExibirInformacoes() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
+        public virtual void ExibirInformacoes()
         {
             Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || Valor para aluguel diária: R${ValorBaseDiariaAluguel:F2}.");
         }
 
-        public virtual void ExibirInformacoesAlugados() //pedir um Veiculo e assim escrever todos com um foreach na lista de Veiculos
+        public virtual void ExibirInformacoesAlugados()
         {
             Console.WriteLine($"Modelo: {Modelo} || Marca: {Marca} || Ano: {Ano} || Disponibilidade: {((Status) ? "Disponível" : "Alugado")} || VALOR A PAGAR PELA ALUGAÇÃO: R${ValorAluguelAPagar:F2}.");
         }
     }
-
 }
